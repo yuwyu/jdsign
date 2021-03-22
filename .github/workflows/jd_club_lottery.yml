@@ -1,15 +1,16 @@
 # This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
 # For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
 
-name: jd_club_lottery
+name: 摇京豆jd_club_lottery
 
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 16 * * *'
+    - cron: '35 15 * * *'
   watch:
     types: started
-
+  repository_dispatch:
+    types: club_lottery
 jobs:
   build:
 
@@ -24,6 +25,13 @@ jobs:
       - name: npm install
         run: |
           npm install
+      - name: Set up Python 3.7
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.7
+      - name: '定时运行'
+        run: |
+              python3 wait24.py 0.1 0.1 29
       - name: '运行 【摇京豆脚本】'
         run: |
           node jd_club_lottery.js
@@ -37,3 +45,4 @@ jobs:
           BARK_SOUND: ${{ secrets.BARK_SOUND }}
           DD_BOT_TOKEN: ${{ secrets.DD_BOT_TOKEN }}
           DD_BOT_SECRET: ${{ secrets.DD_BOT_SECRET }}
+          IGOT_PUSH_KEY: ${{ secrets.IGOT_PUSH_KEY }}
