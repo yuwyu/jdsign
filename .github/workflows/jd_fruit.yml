@@ -27,7 +27,6 @@ jobs:
           npm install
       - name: '运行 【东东农场】'
         run: |
-          curl https://raw.githubusercontent.com/hajiuhajiu/jdsign1112/master/jd_fruit.js -o jd_fruit.js
           node jd_fruit.js
         env:
           JD_COOKIE: ${{ secrets.JD_COOKIE }}
@@ -43,3 +42,4 @@ jobs:
           DD_BOT_TOKEN: ${{ secrets.DD_BOT_TOKEN }}
           DD_BOT_SECRET: ${{ secrets.DD_BOT_SECRET }}
           IGOT_PUSH_KEY: ${{ secrets.IGOT_PUSH_KEY }}
+          QYWX_KEY: ${{ secrets.QYWX_KEY }}
