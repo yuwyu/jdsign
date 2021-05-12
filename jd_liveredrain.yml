@@ -1,15 +1,16 @@
 # This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
 # For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
 
-name: 999999999测试用
+name: 0414jd_liveredrain
 
 on:
   workflow_dispatch:
-
+  schedule:
+    - cron: '35 11,12,13  * * *'
   watch:
     types: started
   repository_dispatch:
-    types: 测试用
+    types: jd_liveredrain
 jobs:
   build:
 
@@ -34,10 +35,19 @@ jobs:
       - name: npm install
         run: |
           npm install
-
+      - name: Set up Python 3.7
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.7
+      - name: '红包雨'
+        run: |
+              curl https://raw.githubusercontent.com/hajiuhajiu/jdsign1112/master/accwait.py -o accwait.py
+              python3 accwait.py 0.1 0.1 59
       - name: '运行'
         run: |
-          node jd_jxnc.js
+          curl https://raw.githubusercontent.com/hajiuhajiu/jdsign1112/master/jd_liveredrain.js -o jd_liveredrain.js
+          node jd_liveredrain.js         
+      
          
           
         env:
